@@ -1,0 +1,32 @@
+name: Helm publish on new commit and new version
+
+on:
+  push:
+    branches:
+      - 'main'
+      - '!gh-pages'
+
+jobs:
+  chart-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Helm Installation
+        uses: azure/setup-helm@v3
+
+      - name: Run chart-releaser for publish on new version
+        if: github.ref == 'refs/heads/main'
+        uses: helm/chart-releaser-action@main
+        with:
+          charts_dir: '.'
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
