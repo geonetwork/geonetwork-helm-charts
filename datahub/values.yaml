@@ -17,6 +17,23 @@ configuration:
     ref: {}
     ssh_secret: {}
 
+ingress:
+  enabled: true
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: mydatahub.org
+      paths:
+        - "/datahub"
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - mydatahub.org
+  
+  # define a custom incressClassName, like "traefik" or "nginx"
+  className: ""
+
 extra_environment: []
   # - name: GN4_API_URL
   #   value: "https://gn4.custom/geonetwork/srv/api"
@@ -36,6 +53,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  annotations: {}
 
 #lifecycle:
 #  postStart:

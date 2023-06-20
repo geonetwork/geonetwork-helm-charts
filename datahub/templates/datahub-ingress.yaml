@@ -1,5 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "helm-datahub.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -32,58 +33,24 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts | default (list "") }}
-    {{- if $.Values.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
-    {{- else }}
-    - host: {{ $.Values.fqdn | quote }}
-    {{- end }}
       http:
         paths:
-          - path: /
+          {{- range .paths }}
+          - path: {{ . }}
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
             pathType: Prefix
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ include "helm-datahub.fullname" $ }}-sp-svc
+                name: {{ $fullName }}-datahub-svc
                 port:
-                  number: 8080
+                  number: {{ $svcPort }}
               {{- else }}
-              serviceName: {{ include "helm-datahub.fullname" $ }}-sp-svc
-              servicePort: 8080
-              {{- end }}
-          {{- if $.Values.helm-datahub.webapps.cas.enabled }}
-          - path: /cas
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: Prefix
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ include "helm-datahub.fullname" $ }}-cas-svc
-                port:
-                  number: 8080
-              {{- else }}
-              serviceName: {{ include "helm-datahub.fullname" $ }}-cas-svc
-              servicePort: 8080
-              {{- end }}
-          {{- end }}
-          {{- if and $.Values.helm-datahub.webapps.geonetwork.enabled $.Values.helm-datahub.webapps.geonetwork.ogc_api_records.enabled }}
-          - path: /ogc-api-records
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: Prefix
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ include "helm-datahub.fullname" $ }}-gn4-ogc-api-records-svc
-                port:
-                  number: 8080
-              {{- else }}
-              serviceName: {{ include "helm-datahub.fullname" $ }}-gn4-ogc-api-records-svc
-              servicePort: 8080
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
     {{- end }}
