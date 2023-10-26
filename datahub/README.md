@@ -20,7 +20,7 @@ None
 
 ## Installing the Chart
 
-To install the chart with the release name `searxng`
+To install the chart with the release name `datahub`
 
 ```console
 helm repo add geonetwork https://helm-charts.geonetwork-opensource.org
