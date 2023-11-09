@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-metadata-editor.fullname" . }}-metadata-editor-deployment
+  labels:
+    {{- include "helm-metadata-editor.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helm-metadata-editor.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm-metadata-editor.selectorLabels" . | nindent 8 }}
+        org.geonetwork.service/name: {{ include "helm-metadata-editor.fullname" . }}-metadata-editor-deployment
+    spec:
+      {{- if .Values.configuration.git.url }}
+      initContainers:
+      {{- include "metadata-editor.bootstrap_metadata-editor_configuration" $ | nindent 6 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.lifecycle }}
+          lifecycle:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: CONFIG_DIRECTORY_OVERRIDE
+              value: "/etc/metadata-editor/{{ .Values.configuration.override_directories.config_directory_override }}"
+            - name: ASSETS_DIRECTORY_OVERRIDE
+              value: "/etc/metadata-editor/{{ .Values.configuration.override_directories.assets_directory_override }}"
+          {{- with .Values.extra_environment }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: metadata-editor-configuration
+              mountPath: /etc/metadata-editor
+      volumes:
+        - name: metadata-editor-configuration
+          emptyDir: {}
+        {{- if .Values.configuration.git.ssh_secret }}
+        - name: ssh-secret
+          secret:
+            secretName: {{ .Values.configuration.git.ssh_secret }}
+            defaultMode: 0400
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

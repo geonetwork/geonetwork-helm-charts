@@ -1,0 +1,79 @@
+replicaCount: 1
+
+image:
+  repository: geonetwork/geonetwork-ui-metadata-editor
+  tag: master
+  pullPolicy: Always
+
+configuration:
+  # The directory name is the directory from the root of the git repository
+  # If the metadata-editor config is located in the /conf directory then write conf
+  # in config_directory_override.
+  override_directories:
+    config_directory_override: "conf"
+    assets_directory_override: "assets"
+  git:
+    url: {}
+    ref: {}
+    ssh_secret: {}
+
+ingress:
+  enabled: true
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: mymetadata-editor.org
+      paths:
+        - "/metadata-editor"
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - mymetadata-editor.org
+  
+  # define a custom incressClassName, like "traefik" or "nginx"
+  className: ""
+
+extra_environment: []
+  # - name: GN4_API_URL
+  #   value: "https://gn4.custom/geonetwork/srv/api"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+  annotations: {}
+
+#lifecycle:
+#  postStart:
+#    exec:
+#      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+#  preStop:
+#    exec:
+#      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
