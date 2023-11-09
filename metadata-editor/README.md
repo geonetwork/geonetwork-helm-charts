@@ -77,10 +77,6 @@ Please refer to the docker documentation for more explanations about this custom
 
 ## Changelog
 
-### Version 0.4.1
-
-Fixing ingress support
-
-### Version 0.4.0
+### Version 0.1.0
 
 Initial version
