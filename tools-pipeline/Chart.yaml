@@ -1,9 +1,0 @@
-apiVersion: v2
-name: tools-pipeline
-description: A Helm chart to deploy the tools-pipelines utility for datahub
-type: application
-version: 0.4.3
-appVersion: "1.16.0"
-maintainers:
-  - name: geOrchestra
-    url: https://www.georchestra.org

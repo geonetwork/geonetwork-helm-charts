@@ -8,11 +8,12 @@ image:
 ingress:
   enabled: false
 
-extra_environment:
-  - name: ES_HOST
-    value: "http://localhost:9200"
-  - name: RECORDS_INDEX
-    value: "geonetwork"
+config:
+  elasticsearch:
+    host: "http://localhost:9200"
+    index: "gn-records"
+
+extraEnvs: []
 
 podAnnotations: {}
 

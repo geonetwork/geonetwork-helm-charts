@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "helm-datahub.name" -}}
+{{- define "gn-tools-pipelines.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "helm-datahub.fullname" -}}
+{{- define "gn-tools-pipelines.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "helm-datahub.chart" -}}
+{{- define "gn-tools-pipelines.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "helm-datahub.labels" -}}
-helm.sh/chart: {{ include "helm-datahub.chart" . }}
-{{ include "helm-datahub.selectorLabels" . }}
+{{- define "gn-tools-pipelines.labels" -}}
+helm.sh/chart: {{ include "gn-tools-pipelines.chart" . }}
+{{ include "gn-tools-pipelines.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "helm-datahub.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "helm-datahub.name" . }}
+{{- define "gn-tools-pipelines.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "gn-tools-pipelines.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "helm-datahub.serviceAccountName" -}}
+{{- define "gn-tools-pipelines.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "helm-datahub.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "gn-tools-pipelines.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

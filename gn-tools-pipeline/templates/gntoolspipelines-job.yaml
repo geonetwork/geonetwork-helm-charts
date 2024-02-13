@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "gn-tools-pipelines.fullname" }}
+  labels:
+    {{ include "gn-tools-pipelines.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: init
+          image: "{{ .Values.init.image }}"
+          command: ["sh", "-c", "echo 'init container'"]
+      containers:
+        - name: {{ include "gn-tools-pipelines.fullname" }}
+          image: "{{ .Values.image }}"
+          env:
+            - name: ES_HOST
+              value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
+            - name: RECORDS_INDEX
+              value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
+      restartPolicy: Never
+
+  backoffLimit: 2
