@@ -13,28 +13,6 @@ config:
     host: "http://localhost:9200"
     index: "gn-records"
 
-extraEnvs: []
-
-podAnnotations: {}
-
-podSecurityContext: {}
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-#lifecycle:
-#  postStart:
-#    exec:
-#      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
-#  preStop:
-#    exec:
-#      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
-
 resources:
   limits:
     cpu: 100m
@@ -43,9 +21,3 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
