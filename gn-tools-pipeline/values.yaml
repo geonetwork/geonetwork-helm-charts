@@ -5,19 +5,7 @@ image:
   tag: latest
   pullPolicy: Always
 
-ingress:
-  enabled: false
-
 config:
   elasticsearch:
     host: "http://localhost:9200"
     index: "gn-records"
-
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
