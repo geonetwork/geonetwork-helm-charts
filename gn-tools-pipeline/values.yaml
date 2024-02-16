@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image:
+  repository: geonetwork/geonetwork-ui-tools-pipelines
+  tag: latest
+  pullPolicy: Always
+
+config:
+  elasticsearch:
+    host: "http://localhost:9200"
+    index: "gn-records"
