@@ -9,6 +9,7 @@
     cp /ssh-secret/ssh-privatekey /root/.ssh/id_rsa ;
     chmod 0600 /root/.ssh/id_rsa ;
     {{- end }}
+    rm -Rf /etc/datahub
     git clone --depth 1 --single-branch {{ .Values.configuration.git.url }} -b {{ .Values.configuration.git.ref }} /etc/datahub ;
   {{- if .Values.configuration.git.ssh_secret }}
   env:
