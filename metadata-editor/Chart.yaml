@@ -2,7 +2,7 @@ apiVersion: v2
 name: metadata-editor
 description: A Helm chart to deploy the metadata-editor application
 type: application
-version: 0.1.1
+version: 0.1.2
 appVersion: "1.0.0"
 maintainers:
   - name: geOrchestra
