@@ -1,8 +1,9 @@
 replicaCount: 1
 
 image:
+  # check the oficial image tags to see witch is one you need
   repository: geonetwork/geonetwork-ui-datahub
-  tag: master
+  tag: latest
   pullPolicy: Always
 
 configuration:
