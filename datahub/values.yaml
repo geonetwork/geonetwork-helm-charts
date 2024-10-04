@@ -1,8 +1,10 @@
 replicaCount: 1
 
 image:
+  # Check the official image tags to see which is one you need
+  # https://hub.docker.com/r/geonetwork/geonetwork-ui-datahub/tags
   repository: geonetwork/geonetwork-ui-datahub
-  tag: master
+  tag: latest
   pullPolicy: Always
 
 configuration:
