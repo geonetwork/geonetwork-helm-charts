@@ -58,13 +58,15 @@ helm install datahub geonetwork/datahub -f values.yaml
 
 ## Datahub configuration
 
-Through the parameter `configuration.git`, you can set a git repository that will be used for configuring datahub.
+If you want, through the parameter `configuration.git`, you can set a git repository that will be used for configuring datahub. This is not mandatory.
 
 Both `configuration.config_directory_override` and `configuration.assets_directory_override` are available to specify the directory where datahub should find the configuration.
 
 The default values are `/conf` for the configuration and `/assets` for the assets.
 
 Please refer to the docker documentation for more explanations about this custom configuration: https://github.com/geonetwork/geonetwork-ui/tree/main/apps/datahub#specifying-a-custom-configuration-file
+
+You can also configure some options using the environment variables like `GN4_API_URL`. You can find all the other environment variables here: https://github.com/geonetwork/geonetwork-ui/blob/main/tools/docker/Dockerfile.apps
 
 ## Values
 
