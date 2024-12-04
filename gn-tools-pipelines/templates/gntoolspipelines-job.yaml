@@ -8,23 +8,25 @@ spec:
   schedule: "0 1 1 1 *"
   jobTemplate:
     spec:
-      initContainers:
-        - name: init
-          image: curlimages/curl:latest
-          command: ['sh', '-c', 'while [ `curl -Lk --write-out "%{http_code}\n" --silent --output /dev/null "{{ .Values.config.elasticsearch.host }}/{{ .Values.config.elasticsearch.index }}"` -ne 200 ]; do sleep 2; done']
-      containers:
-        - name: {{ include "gn-tools-pipelines.fullname" . }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: ES_HOST
-              value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
-            - name: RECORDS_INDEX
-              value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
-      restartPolicy: Never
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{-  toYaml . | nindent 6 }}
-      {{- end }}
+      template:
+        spec:
+          initContainers:
+            - name: init
+              image: curlimages/curl:latest
+              command: ['sh', '-c', 'while [ `curl -Lk --write-out "%{http_code}\n" --silent --output /dev/null "{{ .Values.config.elasticsearch.host }}/{{ .Values.config.elasticsearch.index }}"` -ne 200 ]; do sleep 2; done']
+          containers:
+            - name: {{ include "gn-tools-pipelines.fullname" . }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              env:
+                - name: ES_HOST
+                  value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
+                - name: RECORDS_INDEX
+                  value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
+          restartPolicy: Never
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{-  toYaml . | nindent 6 }}
+          {{- end }}
 
   backoffLimit: 2
