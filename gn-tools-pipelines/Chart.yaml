@@ -2,7 +2,7 @@ apiVersion: v2
 name: gn-tools-pipelines
 description: A Helm chart to deploy the tools-pipelines utility for geonetwork-ui
 type: application
-version: 0.1.1
+version: 1.0.0
 appVersion: "1.0"
 maintainers:
   - name: geOrchestra

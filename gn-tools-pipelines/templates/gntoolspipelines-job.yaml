@@ -1,11 +1,12 @@
 apiVersion: batch/v1
-kind: Job
+kind: CronJob
 metadata:
   name: {{ include "gn-tools-pipelines.fullname" . }}
   labels:
     {{ include "gn-tools-pipelines.labels" . | nindent 4 }}
 spec:
-  template:
+  schedule: "0 1 1 1 *"
+  jobTemplate:
     spec:
       initContainers:
         - name: init
