@@ -15,15 +15,15 @@ spec:
         - name: {{ include "gn-tools-pipelines.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.tolerations }}
-          tolerations:
-            {{-  toYaml . | nindent 10 }}
-          {{- end }}
           env:
             - name: ES_HOST
               value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
             - name: RECORDS_INDEX
               value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
       restartPolicy: Never
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{-  toYaml . | nindent 6 }}
+      {{- end }}
 
   backoffLimit: 2
