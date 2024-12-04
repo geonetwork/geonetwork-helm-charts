@@ -15,6 +15,10 @@ spec:
         - name: {{ include "gn-tools-pipelines.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if Values.config.tolerations }}
+          tolerations:
+            {{- Values.config.tolerations | toYaml | nindent 8 }}
+          {{- end }}
           env:
             - name: ES_HOST
               value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
