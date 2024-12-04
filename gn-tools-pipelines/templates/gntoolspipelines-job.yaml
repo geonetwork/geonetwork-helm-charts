@@ -15,9 +15,9 @@ spec:
         - name: {{ include "gn-tools-pipelines.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.tolerations }}
+          {{- with .Values.tolerations }}
           tolerations:
-            {{- .Values.tolerations | toYaml | nindent 10 }}
+            {{-  toYaml . | nindent 10 }}
           {{- end }}
           env:
             - name: ES_HOST
