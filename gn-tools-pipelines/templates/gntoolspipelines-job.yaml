@@ -26,5 +26,9 @@ spec:
             - name: RECORDS_INDEX
               value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
       restartPolicy: Never
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{-  toYaml . | nindent 6 }}
+      {{- end }}
 
   backoffLimit: 2

@@ -9,4 +9,5 @@ config:
   elasticsearch:
     host: "http://localhost:9200"
     index: "gn-records"
-  tolerations: []
+
+tolerations: []
