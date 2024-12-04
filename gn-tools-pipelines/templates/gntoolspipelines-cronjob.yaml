@@ -5,8 +5,8 @@ metadata:
   labels:
     {{ include "gn-tools-pipelines.labels" . | nindent 4 }}
 spec:
-  schedule: {{ $job.schedule | quote }}
-  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
+  schedule: {{ .Values.job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.job.successfulJobsHistoryLimit }}
   jobTemplate:
     spec:
       template:
