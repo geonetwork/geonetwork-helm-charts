@@ -1,10 +1,9 @@
-name: Helm publish on new commit and new version
+name: Helm publish new version
 
 on:
   push:
     branches:
       - 'main'
-      - '!gh-pages'
 
 jobs:
   chart-publish:
@@ -20,13 +19,33 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Helm Installation
-        uses: azure/setup-helm@v3
-
-      - name: Run chart-releaser for publish on new version
-        if: github.ref == 'refs/heads/main'
-        uses: helm/chart-releaser-action@main
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
         with:
-          charts_dir: '.'
+          version: v3.12.0
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.5.0
+        with:
+          charts_dir: .
+          config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: "true"
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push charts to GHCR
+        run: |
+          shopt -s nullglob
+          for pkg in .cr-release-packages/*.tgz; do
+            if [ -z "${pkg:-}" ]; then
+              break
+            fi
+            helm push "${pkg}" "oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/geonetwork-helm-charts"
+          done
