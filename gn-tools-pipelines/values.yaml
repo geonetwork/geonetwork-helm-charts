@@ -5,7 +5,7 @@ job:
     repository: geonetwork/geonetwork-ui-tools-pipelines
     tag: latest
     pullPolicy: Always
-  schedule: "0 6 * * *"
+  schedule: "0 1 1 1 *"
   successfulJobsHistoryLimit: 3
   restartPolicy: OnFailure
   tolerations: []
