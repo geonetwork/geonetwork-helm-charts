@@ -105,6 +105,19 @@ entries:
   gn-tools-pipelines:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2024-12-05T06:49:25.756174519Z"
+    description: A Helm chart to deploy the tools-pipelines utility for geonetwork-ui
+    digest: 524d3fdf32ab3d4718a20b5eddd3bf423f37fc6f81a5727d423efbcd3fbeaa8d
+    maintainers:
+    - name: geOrchestra
+      url: https://www.georchestra.org
+    name: gn-tools-pipelines
+    type: application
+    urls:
+    - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/gn-tools-pipelines-1.1.0/gn-tools-pipelines-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2024-12-04T14:26:19.028163361Z"
     description: A Helm chart to deploy the tools-pipelines utility for geonetwork-ui
     digest: c2c259d141ed283d7f5d75a9db7a54115929be245309796af6f696d8a1b67c23
@@ -207,4 +220,4 @@ entries:
     urls:
     - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/metadata-editor-0.1.0/metadata-editor-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-04T14:26:19.164703309Z"
+generated: "2024-12-05T06:49:25.756254078Z"
