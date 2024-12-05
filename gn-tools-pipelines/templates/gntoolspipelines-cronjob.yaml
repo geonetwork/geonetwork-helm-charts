@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "gn-tools-pipelines.fullname" . }}
+  labels:
+    {{ include "gn-tools-pipelines.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.job.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          initContainers:
+          - name: init
+            image: curlimages/curl:latest
+            command: ['sh', '-c', 'while [ `curl -Lk --write-out "%{http_code}\n" --silent --output /dev/null "{{ .Values.config.elasticsearch.host }}/{{ .Values.config.elasticsearch.index }}"` -ne 200 ]; do sleep 2; done']
+          containers:
+          - name: {{ include "gn-tools-pipelines.fullname" . }}
+            image: "{{ .Values.job.image.repository }}:{{ .Values.job.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.job.image.pullPolicy }}
+            env:
+              - name: ES_HOST
+                value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
+              - name: RECORDS_INDEX
+                value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
+          restartPolicy: Never
+          {{- with .Values.job.tolerations }}
+          tolerations:
+            {{-  toYaml . | nindent 10 }}
+          {{- end }}
