@@ -23,8 +23,6 @@ None
 To install the chart with the release name `datahub`
 
 ```console
-helm repo add geonetwork https://helm-charts.geonetwork-opensource.org
-helm repo update
 helm install datahub geonetwork/datahub
 ```
 

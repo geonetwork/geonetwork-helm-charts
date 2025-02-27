@@ -4,8 +4,8 @@ image:
   # Check the official image tags to see which is one you need
   # https://hub.docker.com/r/geonetwork/geonetwork-ui-datahub/tags
   repository: geonetwork/geonetwork-ui-datahub
-  tag: latest
-  pullPolicy: Always
+  tag: 2.4.2
+  pullPolicy: IfNotPresent
 
 configuration:
   # The directory name is the directory from the root of the git repository

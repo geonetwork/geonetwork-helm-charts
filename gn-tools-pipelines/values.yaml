@@ -3,8 +3,8 @@ replicaCount: 1
 job:
   image:
     repository: geonetwork/geonetwork-ui-tools-pipelines
-    tag: latest
-    pullPolicy: Always
+    tag: 2.4.2
+    pullPolicy: IfNotPresent
   schedule: "0 1 1 1 *"
   successfulJobsHistoryLimit: 3
   restartPolicy: OnFailure
