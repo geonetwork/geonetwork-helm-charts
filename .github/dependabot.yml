@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "helm"
+    directory: "/datahub"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/gn-tools-pipelines"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/metadata-editor"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: "weekly"
