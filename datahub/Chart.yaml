@@ -2,7 +2,7 @@ apiVersion: v2
 name: datahub
 description: A Helm chart to deploy the datahub application
 type: application
-version: 1.1.0
+version: 1.1.1
 appVersion: "1.16.0"
 maintainers:
   - name: geOrchestra
