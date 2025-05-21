@@ -209,6 +209,19 @@ entries:
   metadata-editor:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-05-21T15:22:19.403770986Z"
+    description: A Helm chart to deploy the metadata-editor application
+    digest: 271e45d63bcd09f018b46aa342d9510a619b66cd82e597e652921a1bdeb5d3f9
+    maintainers:
+    - name: geOrchestra
+      url: https://www.georchestra.org
+    name: metadata-editor
+    type: application
+    urls:
+    - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/metadata-editor-1.1.1/metadata-editor-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-02-27T10:10:18.163291882Z"
     description: A Helm chart to deploy the metadata-editor application
     digest: 0a5f9ea4929916d0c5b97f65b0ae4fbc07667fc28ba430adefa5f77670ebdc09
@@ -272,4 +285,4 @@ entries:
     urls:
     - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/metadata-editor-0.1.0/metadata-editor-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-21T15:21:44.508404608Z"
+generated: "2025-05-21T15:22:19.403828864Z"
