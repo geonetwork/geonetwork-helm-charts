@@ -3,6 +3,19 @@ entries:
   datahub:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-05-21T15:21:44.50834212Z"
+    description: A Helm chart to deploy the datahub application
+    digest: b29751dd14a4b883320835e13a4f3ee88d5ed88c9a90d37d8e608b3f9b1b46e6
+    maintainers:
+    - name: geOrchestra
+      url: https://www.georchestra.org
+    name: datahub
+    type: application
+    urls:
+    - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/datahub-1.1.1/datahub-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-02-27T10:10:17.818367382Z"
     description: A Helm chart to deploy the datahub application
     digest: 4974238fccef4e82a2955de51731a84af89007726d41ed10e985e4455786e764
@@ -259,4 +272,4 @@ entries:
     urls:
     - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/metadata-editor-0.1.0/metadata-editor-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-27T10:10:18.16335491Z"
+generated: "2025-05-21T15:21:44.508404608Z"
