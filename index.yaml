@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   datahub:
   - apiVersion: v2
+    appVersion: 2.6.0
+    created: "2025-07-10T09:06:14.882284696Z"
+    description: A Helm chart to deploy the datahub application
+    digest: ba6dce7810172e5d9c5317402decae71d3125e1cfa125851714f9fd14587c2dc
+    maintainers:
+    - name: geonetwork-ui
+      url: https://geonetwork.github.io/geonetwork-ui/main/docs/
+    name: datahub
+    type: application
+    urls:
+    - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/datahub-1.2.0/datahub-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2025-05-21T15:21:44.50834212Z"
     description: A Helm chart to deploy the datahub application
@@ -285,4 +298,4 @@ entries:
     urls:
     - https://github.com/geonetwork/geonetwork-helm-charts/releases/download/metadata-editor-0.1.0/metadata-editor-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-21T15:22:19.403828864Z"
+generated: "2025-07-10T09:06:15.063954382Z"
