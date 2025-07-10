@@ -78,6 +78,10 @@ You can also configure some options using the environment variables like `GN4_AP
 
 ## Changelog
 
+### Version 1.2.0
+
+Bump datahub to version 2.6.0.
+
 ### Version 0.4.1
 
 Fixing ingress support
