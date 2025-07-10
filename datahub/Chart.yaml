@@ -2,8 +2,8 @@ apiVersion: v2
 name: datahub
 description: A Helm chart to deploy the datahub application
 type: application
-version: 1.1.1
-appVersion: "1.16.0"
+version: 1.2.0
+appVersion: "2.6.0"
 maintainers:
-  - name: geOrchestra
-    url: https://www.georchestra.org
+  - name: geonetwork-ui
+    url: https://geonetwork.github.io/geonetwork-ui/main/docs/
