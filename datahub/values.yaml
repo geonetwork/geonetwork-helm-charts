@@ -8,6 +8,9 @@ image:
   pullPolicy: IfNotPresent
 
 configuration:
+  image:
+    repository: bitnami/git
+    tag: 2
   # The directory name is the directory from the root of the git repository
   # If the datahub config is located in the /conf directory then write conf
   # in config_directory_override.

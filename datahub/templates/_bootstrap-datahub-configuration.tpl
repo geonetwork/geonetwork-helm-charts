@@ -1,6 +1,6 @@
 {{- define "datahub.bootstrap_datahub_configuration" -}}
 - name: bootstrap-datahub-configuration
-  image: bitnami/git
+  image: "{{ .Values.configuration.image.repository }}:{{ .Values.configuration.image.tag }}"
   command:
   - /bin/sh
   - -c
