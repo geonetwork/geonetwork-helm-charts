@@ -22,6 +22,10 @@ spec:
             env:
               - name: ES_HOST
                 value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
+              - name: ES_USERNAME
+                value: {{ .Values.config.elasticsearch.username | quote }}
+              - name: ES_PASSWORD
+                value: {{ .Values.config.elasticsearch.password | quote }}
               - name: RECORDS_INDEX
                 value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
           restartPolicy: Never
