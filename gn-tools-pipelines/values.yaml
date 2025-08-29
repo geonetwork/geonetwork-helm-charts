@@ -14,3 +14,7 @@ config:
   elasticsearch:
     host: "http://localhost:9200"
     index: "gn-records"
+    # Optional authentication credentials for Elasticsearch
+    # If both username and password are provided, they will be used for authentication
+    username: ""
+    password: ""
