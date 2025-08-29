@@ -11,21 +11,6 @@ spec:
     spec:
       template:
         spec:
-          initContainers:
-          - name: init
-            image: curlimages/curl:latest
-            command:
-              - sh
-              - -c
-              - |
-                ES_USER_FLAG=""
-                if [ -n "{{ .Values.config.elasticsearch.username }}" ] && [ -n "{{ .Values.config.elasticsearch.password }}" ]; then
-                  ES_USER_FLAG="--user '{{ .Values.config.elasticsearch.username }}:{{ .Values.config.elasticsearch.password }}'"
-                fi
-                while [ "$(eval curl -Lk $ES_USER_FLAG --write-out "%{http_code}\n" --silent --output /dev/null "{{ .Values.config.elasticsearch.host }}/{{ .Values.config.elasticsearch.index }}")" -ne 200 ]; do
-                  echo "Waiting for Elasticsearch..."
-                  sleep 2
-                done
           containers:
           - name: {{ include "gn-tools-pipelines.fullname" . }}
             image: "{{ .Values.job.image.repository }}:{{ .Values.job.image.tag | default .Chart.AppVersion }}"
