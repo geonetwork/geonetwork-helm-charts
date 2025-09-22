@@ -4,7 +4,7 @@ image:
   # Check the official image tags to see which is one you need
   # https://hub.docker.com/r/geonetwork/geonetwork-ui-datahub/tags
   repository: geonetwork/geonetwork-ui-datahub
-  tag: 2.6.1
+  tag: 2.6.2
   pullPolicy: IfNotPresent
 
 configuration:
