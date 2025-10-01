@@ -10,13 +10,13 @@ job:
   restartPolicy: OnFailure
   tolerations: []
 
-configuration:
-  image:
-    repository: curlimages/curl
-    tag: latest
-
 config:
   elasticsearch:
     host: "http://localhost:9200"
     index: "gn-records"
-    service: "georchestra-gn4-elasticsearch-svc"
+  image:
+    repository: curlimages/curl
+    tag: latest
+  service:
+    host: "georchestra-gn4-elasticsearch-svc"
+    port: 9200
