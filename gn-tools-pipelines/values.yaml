@@ -10,6 +10,11 @@ job:
   restartPolicy: OnFailure
   tolerations: []
 
+configuration:
+  image:
+    repository: curlimages/curl
+    tag: latest
+
 config:
   elasticsearch:
     host: "http://localhost:9200"
