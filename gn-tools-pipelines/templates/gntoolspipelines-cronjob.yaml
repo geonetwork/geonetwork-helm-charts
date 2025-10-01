@@ -14,7 +14,7 @@ spec:
           initContainers:
             - name: init
               image: "{{ .Values.configuration.image.repository }}:{{ .Values.configuration.image.tag }}"
-              command: ['sh', '-c', 'while ! nc -z {{ .Values.config.elasticsearch.host }} 9200; do sleep 2; done']
+              command: ['sh', '-c', 'while ! nc -z {{ .Values.configuration.elasticsearch.service }} 9200; do sleep 2; done']
           containers:
           - name: {{ include "gn-tools-pipelines.fullname" . }}
             image: "{{ .Values.job.image.repository }}:{{ .Values.job.image.tag | default .Chart.AppVersion }}"
