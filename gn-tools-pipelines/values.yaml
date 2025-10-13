@@ -3,7 +3,7 @@ replicaCount: 1
 job:
   image:
     repository: geonetwork/geonetwork-ui-tools-pipelines
-    tag: 2.6.2
+    tag: 2.7.1
     pullPolicy: IfNotPresent
   schedule: "0 1 1 1 *"
   successfulJobsHistoryLimit: 3
