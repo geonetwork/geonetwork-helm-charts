@@ -8,7 +8,7 @@ image:
 configuration:
   image:
     repository: alpine/git
-    tag: 2.49.1
+    tag: 2.52.0
   # The directory name is the directory from the root of the git repository
   # If the metadata-editor config is located in the /conf directory then write conf
   # in config_directory_override.
