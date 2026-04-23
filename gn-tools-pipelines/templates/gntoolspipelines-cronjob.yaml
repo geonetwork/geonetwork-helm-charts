@@ -24,8 +24,16 @@ spec:
                 value: {{ .Values.config.elasticsearch.host | required ".Values.config.elasticsearch.host is required." }}
               - name: ES_USERNAME
                 value: {{ .Values.config.elasticsearch.username | quote }}
+            {{- if .Values.config.elasticsearch.existingSecret }}
+              - name: ES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: {{ .Values.config.elasticsearch.existingSecret }}
+                    key: password
+              {{- else }}
               - name: ES_PASSWORD
                 value: {{ .Values.config.elasticsearch.password | quote }}
+              {{- end }}
               - name: RECORDS_INDEX
                 value: {{ .Values.config.elasticsearch.index | required ".Values.config.elasticsearch.index is required." }}
           restartPolicy: Never
