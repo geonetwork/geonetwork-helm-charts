@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: geonetwork/geonetwork-ui-metadata-editor
-  tag: 2.8.3
+  tag: 2.9.0
   pullPolicy: IfNotPresent
 
 configuration:
